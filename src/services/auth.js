@@ -109,6 +109,20 @@ const authService = {
     await emailService.sendEmail(email, emailSubject.SUCCESSFUL_PASSWORD_RESET, language, {
       firstName
     })
+  },
+
+  confirmEmail: async (token) => {
+    const tokenData = tokenService.validateConfirmToken(token)
+    const tokenFromDB = await tokenService.findToken(token, CONFIRM_TOKEN)
+
+    if (!tokenData || !tokenFromDB) {
+      throw createError(400, BAD_RESET_TOKEN)
+    }
+
+    const { id: userId } = tokenData
+    await privateUpdateUser(userId, { isEmailConfirmed: true })
+
+    await tokenService.removeConfirmToken(token)
   }
 }
 
