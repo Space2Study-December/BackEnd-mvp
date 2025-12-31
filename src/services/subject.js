@@ -7,7 +7,7 @@ const subjectService = {
       .sort(sort)
       .exec()
 
-    return { count, items }
+    return { items }
   },
 }
 
