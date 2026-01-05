@@ -8,6 +8,7 @@ const subjectSchema = new Schema(
     name: {
       type: String,
       required: [true, FIELD_CANNOT_BE_EMPTY('name')],
+      unique: true,
     },
     category: {
       type: String,
