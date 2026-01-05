@@ -1,22 +1,27 @@
 const subjectsService = require('~/services/subject')
-const getSortOptions = require('~/utils/getSortOptions')
 
-const getSubjects = async (req, res) => {
-  const { sort } = req.query
+const getSubjects = async (_, res) => {
+  const subjects = await subjectsService.getSubjects()
 
-  const sortOptions = getSortOptions(sort)
-  try {
-    const subjects = await subjectsService.getSubjects(
-      sortOptions
-    )
+  res.status(200).json(subjects)
+}
 
-    res.status(200).json(subjects)
-  } catch (error) {
-    res.status(500).json({ error: error.message })
-  }
+const createSubject = async (req, res) => {
+  const data = req.body
+  const newSubject = await subjectsService.createSubject(data)
 
+  res.status(201).send(newSubject)
+}
+
+const getSubjectByName = async (req, res) => {
+  const { name } = req.params
+  const subject = await subjectsService.getOneSubjectByName(name)
+
+  res.status(200).json(subject)
 }
 
 module.exports = {
   getSubjects,
+  createSubject,
+  getSubjectByName
 }

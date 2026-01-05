@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose')
 
-const { RESOURCES_CATEGORY, SUBJECT } = require('~/consts/models')
+const { CATEGORY, SUBJECT } = require('~/consts/models')
 const { FIELD_CANNOT_BE_EMPTY } = require('~/consts/errors')
 
 const subjectSchema = new Schema(
@@ -9,15 +9,12 @@ const subjectSchema = new Schema(
       type: String,
       required: [true, FIELD_CANNOT_BE_EMPTY('name')],
     },
-    resourcesCategory: {
-      //?
-      type: Schema.Types.ObjectId,
-      ref: RESOURCES_CATEGORY,
-      required: [true, FIELD_CANNOT_BE_EMPTY('resourcesCategory')]
+    category: {
+      type: String,
+      ref: CATEGORY,
+      required: [true, FIELD_CANNOT_BE_EMPTY('category')]
     },
   },
-  // What is the purpose?
-  { timestamps: true, versionKey: false },
 )
 
 module.exports = model(SUBJECT, subjectSchema)
