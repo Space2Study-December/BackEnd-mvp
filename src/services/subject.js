@@ -4,7 +4,11 @@ const { createNotFoundError } = require('~/utils/errorsHelper')
 const subjectService = {
   getSubjects: async () => {
     const items = await Subject.find()
+    return { items }
+  },
 
+  getSubjectNames: async () => {
+    const items = await Subject.find().select('name').exec()
     return { items }
   },
 
@@ -14,17 +18,16 @@ const subjectService = {
       throw createNotFoundError();
     }
     const newSubject = await Subject.create(data)
-
     return newSubject
   },
 
-  getOneSubjectByName: async (name) => {
-    if (!name) {
+  getFilteredSubjects: async (match) => {
+    if (!match) {
       throw createNotFoundError();
     }
-    const subject = await Subject.findOne({ name });
-    return subject;
-  }
+    const items = await Subject.find(match);
+    return { items };
+  },
 }
 
 module.exports = subjectService

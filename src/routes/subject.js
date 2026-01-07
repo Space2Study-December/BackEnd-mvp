@@ -6,7 +6,8 @@ const subjectController = require('~/controllers/subject')
 
 router.use(authMiddleware)
 router.get('/', asyncWrapper(subjectController.getSubjects))
-router.get('/:name', asyncWrapper(subjectController.getSubjectByName))
+router.get('/names', asyncWrapper(subjectController.getSubjectNames))
+router.get('/filterBy', asyncWrapper(subjectController.getFilteredSubjects))
 router.post('/', asyncWrapper(subjectController.createSubject))
 
 module.exports = router

@@ -10,10 +10,10 @@ const subjectSchema = new Schema(
       required: [true, FIELD_CANNOT_BE_EMPTY('name')],
       unique: true,
     },
-    category: {
-      type: String,
+    categoryId: {
+      type: Schema.Types.ObjectId,
       ref: CATEGORY,
-      required: [true, FIELD_CANNOT_BE_EMPTY('category')]
+      required: [true, FIELD_CANNOT_BE_EMPTY('categoryId')]
     },
   },
 )

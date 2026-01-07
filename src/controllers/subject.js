@@ -13,15 +13,21 @@ const createSubject = async (req, res) => {
   res.status(201).send(newSubject)
 }
 
-const getSubjectByName = async (req, res) => {
-  const { name } = req.params
-  const subject = await subjectsService.getOneSubjectByName(name)
+const getFilteredSubjects = async (req, res) => {
+  const subjects = await subjectsService.getFilteredSubjects(req.query)
 
-  res.status(200).json(subject)
+  res.status(200).json(subjects)
+}
+
+const getSubjectNames = async (_, res) => {
+  const subjects = await subjectsService.getSubjectNames()
+
+  res.status(200).json(subjects)
 }
 
 module.exports = {
   getSubjects,
   createSubject,
-  getSubjectByName
+  getFilteredSubjects,
+  getSubjectNames
 }
