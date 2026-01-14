@@ -1,4 +1,7 @@
 const router = require('express').Router()
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml')
 
 const auth = require('~/routes/auth')
 const user = require('~/routes/user')
@@ -9,6 +12,8 @@ const resourcesCategory = require('~/routes/resourcesCategory')
 const offer = require('~/routes/offer')
 const subject = require('~/routes/subject')
 const category = require('~/routes/category')
+
+router.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 router.use('/auth', auth)
 router.use('/users', user)
