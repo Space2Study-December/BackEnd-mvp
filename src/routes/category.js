@@ -6,6 +6,7 @@ const categoryController = require('~/controllers/category')
 
 router.use(authMiddleware)
 router.get('/', asyncWrapper(categoryController.getCategories))
+router.get('/getAllCategories', asyncWrapper(categoryController.getAllCategories))
 router.get('/:name', asyncWrapper(categoryController.getCategoryByName))
 router.post('/', asyncWrapper(categoryController.createCategory))
 

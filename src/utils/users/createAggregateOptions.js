@@ -11,6 +11,8 @@ const generateOptions = (value) => {
 const createAggregateOptions = (query) => {
   const {
     email,
+    categoryId,
+    search,
     isEmailConfirmed,
     isFirstLogin,
     lastLogin = '{}',
@@ -43,6 +45,14 @@ const createAggregateOptions = (query) => {
 
   if (role) {
     match.role = role
+  }
+
+  if (categoryId) {
+    match.categoryId = categoryId
+  }
+
+  if (search) {
+    match.search = search
   }
 
   if (from || to) {
